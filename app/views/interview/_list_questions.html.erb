@@ -1,0 +1,16 @@
+<div id="div_list_question" question_max_number="<%= Question.count_questions(interview_id)%>">
+  <% @questions.each_with_index do |question,index_qs|%>
+    <div class="question" style="margin-top: 20px">
+      <div class="question_show_<%= question.id%>">
+        <p style="font-size: 15px;color: #0077B3;float:left;margin-right: 50px">Câu<%= index_qs + 1%>: <%= question.content%></p>
+        <a href="#" class="edit_question" value="<%= question.id%>" style="color: #0077B3;">Edit /</a>
+        <a href="#" class="delete" value="<%= question.id%>" style="color: #0077B3">Delete</a><br /><br />
+        <% question.answers.each do |answer|%>
+          <input type="checkbox" name="check_answer"/> <%= answer.content%><br />
+        <% end %>
+      </div>
+      <%= render :partial => "edit_question" , :locals => { :question => question,:index_qs => index_qs }%>  
+    </div>
+  <% end -%>
+</div>
+
